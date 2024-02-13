@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Responsividad con Express.js y Bootstrap</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/index.html">Informe de express.js</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+                aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Temas</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/Entorno_Configuracion/index.html">Entorno y Configuracion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Hosting/index.html">Hosting</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Correo/CorreoInfo.html">Envio de Correo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/PDF/pdf.html">Crear PDF</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Descarga_Archivos/index.html">Descarga de Achivos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Encriptacion/index.html">Encriptacion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Menus/indeex.html">Menus</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Almacen_Imagenes/index.html">Imagenes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Debug</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Parametos/index.html">Parametos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Responsividad/index.html">Resposividad</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Jquery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Sweet</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Crud</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Publicacion</a>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Navegadores
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="/Navegadores/indexWeb.html">Web</a></li>
+                                <li><a class="dropdown-item" href="/Navegadores/indexMov.html">Moviles</a></li>
+                               
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Manejo de Exepciones</a>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+    </nav>
+
+<div class="container mt-5">
+    <h1 class="mb-4">Responsividad con Express.js y Bootstrap</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Incluye Bootstrap en tu Proyecto</h5>
+            <p>
+                Asegúrate de haber incluido el enlace al archivo CSS de Bootstrap en tu archivo HTML. Puedes hacer esto agregando la siguiente línea en el encabezado de tu archivo EJS (o HTML):
+            </p>
+            <code class="mb-3"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"></code>
+
+            <h5 class="card-title">Utiliza el Sistema de Rejilla de Bootstrap</h5>
+            <p>
+                Bootstrap utiliza un sistema de rejilla basado en filas (<code>&lt;div class="row"&gt;</code>) y columnas (<code>&lt;div class="col-XX"&gt;</code>). Asegúrate de organizar tus elementos en filas y columnas para que se ajusten correctamente en diferentes tamaños de pantalla.
+            </p>
+            <p>Ejemplo básico:</p>
+            <code class="mb-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Contenido para la primera columna -->
+                        </div>
+                        <div class="col-md-6">
+                            <!-- Contenido para la segunda columna -->
+                        </div>
+                    </div>
+                </div>
+            </code>
+
+            <h5 class="card-title">Habilita la Metavista y Escala</h5>
+            <p>
+                Agrega la siguiente etiqueta meta en la sección &lt;head&gt; de tu archivo HTML para garantizar que la página se adapte correctamente a diferentes dispositivos:
+            </p>
+            <code class="mb-3"><meta name="viewport" content="width=device-width, initial-scale=1"></code>
+
+            <h5 class="card-title">Utiliza Clases de Bootstrap para la Visibilidad</h5>
+            <p>
+                Bootstrap proporciona clases que te permiten mostrar u ocultar elementos en diferentes tamaños de pantalla. Puedes usar clases como <code>d-none</code>, <code>d-md-block</code>, etc.
+            </p>
+            <p>Ejemplo:</p>
+            <code class="mb-3"><div class="d-none d-md-block">Este elemento está oculto en pantallas pequeñas</div></code>
+            
+            <p class="small text-muted">
+                Estos son solo pasos generales. La clave para una buena responsividad es la práctica y la comprensión del sistema de rejilla y las clases de utilidad de Bootstrap. Adapta estos principios según las necesidades específicas de tu aplicación.
+            </p>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

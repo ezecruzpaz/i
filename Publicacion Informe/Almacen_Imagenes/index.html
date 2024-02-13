@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Subida de Imágenes con Express.js y Multer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/index.html">Informe de express.js</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+                aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Temas</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/Entorno_Configuracion/index.html">Entorno y Configuracion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Hosting/index.html">Hosting</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Correo/CorreoInfo.html">Envio de Correo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/PDF/pdf.html">Crear PDF</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Descarga_Archivos/index.html">Descarga de Achivos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Encriptacion/index.html">Encriptacion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Menus/indeex.html">Menus</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Almacen_Imagenes/index.html">Imagenes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Debug</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Parametos/index.html">Parametos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Responsividad/index.html">Resposividad</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Jquery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Sweet</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Crud</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Publicacion</a>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Navegadores
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="/Navegadores/indexWeb.html">Web</a></li>
+                                <li><a class="dropdown-item" href="/Navegadores/indexMov.html">Moviles</a></li>
+                               
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Manejo de Exepciones</a>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+    </nav>
+<div class="container mt-5">
+    <h1 class="mb-4">Subida de Imágenes con Express.js y Multer</h1>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Ejemplo básico de subida de imágenes en Express.js sin un formulario HTML</h5>
+            <p>
+                Para subir imágenes en Express.js sin un formulario HTML, puedes utilizar el middleware Multer para manejar la carga de archivos. Aquí tienes un ejemplo muy básico:
+            </p>
+
+            <h6 class="mt-4">1. Instala las dependencias necesarias:</h6>
+            <pre class="bg-light p-3">
+                <code class="language-bash">
+                    npm install express multer
+                </code>
+            </pre>
+
+            <h6 class="mt-4">2. Configura tu servidor Express.js (app.js o server.js):</h6>
+            <pre class="bg-light p-3">
+                <code class="language-javascript">
+                    const express = require('express');
+                    const multer = require('multer');
+                    const path = require('path');
+
+                    const app = express();
+                    const port = 3000;
+
+                    // Configuración de Multer para gestionar la carga de archivos
+                    const storage = multer.diskStorage({
+                        destination: './uploads/', // Asegúrate de crear esta carpeta en tu proyecto
+                        filename: function (req, file, cb) {
+                            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+                        }
+                    });
+
+                    const upload = multer({ storage: storage });
+
+                    // Configuración de archivos estáticos
+                    app.use(express.static('public'));
+
+                    // Ruta para manejar la carga de imágenes
+                    app.post('/upload', upload.single('imagen'), (req, res) => {
+                        res.send('Imagen subida exitosamente');
+                    });
+
+                    // Iniciar el servidor
+                    app.listen(port, () => {
+                        console.log(`Servidor Express en el puerto ${port}`);
+                    });
+                </code>
+            </pre>
+
+            <h6 class="mt-4">3. Crea la carpeta de almacenamiento:</h6>
+            <pre class="bg-light p-3">
+                <code class="language-bash">
+                    mkdir -p uploads
+                </code>
+            </pre>
+
+            <h6 class="mt-4">4. Ejecuta tu aplicación:</h6>
+            <pre class="bg-light p-3">
+                <code class="language-bash">
+                    node app.js
+                </code>
+            </pre>
+
+            <p class="small text-muted">
+                Este ejemplo utiliza el middleware Multer para procesar la carga de archivos y almacenar las imágenes en la carpeta 'uploads'. La ruta '/upload' maneja la solicitud POST para la carga de imágenes. Puedes probar esto utilizando herramientas como cURL o Postman para enviar solicitudes POST al servidor. Recuerda ajustar los nombres de las carpetas y archivos según tu estructura de proyecto y asegurarte de tener las dependencias instaladas.
+            </p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="imagen" class="form-label">Selecciona una imagen:</label>
+                    <input type="file" class="form-control" id="imagen" name="imagen">
+                </div>
+                <button type="submit" class="btn btn-primary">Subir Imagen</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

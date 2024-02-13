@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Express.js y HTTPS con Bootstrap</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/index.html">Informe de express.js</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+                aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Temas</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/Entorno_Configuracion/index.html">Entorno y Configuracion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Hosting/index.html">Hosting</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Correo/CorreoInfo.html">Envio de Correo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/PDF/pdf.html">Crear PDF</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Descarga_Archivos/index.html">Descarga de Achivos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Encriptacion/index.html">Encriptacion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Menus/indeex.html">Menus</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Almacen_Imagenes/index.html">Imagenes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Debug</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Parametos/index.html">Parametos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Responsividad/index.html">Resposividad</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Jquery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Sweet</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Crud</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Publicacion</a>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Navegadores
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="/Navegadores/indexWeb.html">Web</a></li>
+                                <li><a class="dropdown-item" href="/Navegadores/indexMov.html">Moviles</a></li>
+                               
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Manejo de Exepciones</a>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+<div class="container mt-5">
+    <h1 class="mb-4">HTTPS con Express.js </h1>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">HTTP (HyperText Transfer Protocol)</h5>
+            <ul>
+                <li>Es el protocolo estándar para la transmisión de información en la web.</li>
+                <li>Los datos se transmiten de forma no cifrada, lo que significa que pueden ser interceptados por terceros.</li>
+                <li>Puedes usar HTTP para aplicaciones que no manejan información sensible y no requieren una capa de seguridad adicional.</li>
+            </ul>
+
+            <h5 class="card-title">HTTPS (HyperText Transfer Protocol Secure)</h5>
+            <ul>
+                <li>Es la versión segura de HTTP, utilizando cifrado SSL/TLS para proteger la transmisión de datos.</li>
+                <li>Proporciona una capa adicional de seguridad al cifrar la comunicación entre el cliente y el servidor.</li>
+                <li>Es esencial para aplicaciones que manejan información sensible, como datos de usuario, contraseñas, pagos, etc.</li>
+            </ul>
+
+            <h5 class="card-title">Habilitar HTTPS en Express.js</h5>
+            <pre>
+                <code class="language-javascript">
+                    const express = require('express');
+                    const https = require('https');
+                    const fs = require('fs');
+
+                    const app = express();
+
+                    // ... Configuración de la aplicación ...
+
+                    // Rutas de la aplicación ...
+
+                    const httpsOptions = {
+                      key: fs.readFileSync('ruta/a/tu/clave-privada.pem'),
+                      cert: fs.readFileSync('ruta/a/tu/certificado.pem')
+                    };
+
+                    const server = https.createServer(httpsOptions, app);
+
+                    const PORT = process.env.PORT || 443;
+
+                    server.listen(PORT, () => {
+                      console.log(`Servidor Express escuchando en el puerto ${PORT} (HTTPS)`);
+                    });
+                </code>
+            </pre>
+            <p>Reemplaza 'ruta/a/tu/clave-privada.pem' y 'ruta/a/tu/certificado.pem' con las rutas a tu clave privada y certificado SSL respectivamente.</p>
+
+            <p>Al habilitar HTTPS, también es recomendable redirigir automáticamente las solicitudes HTTP a HTTPS para garantizar una comunicación segura. Puedes lograr esto usando middleware o configurando tu servidor para redirigir automáticamente las solicitudes HTTP a HTTPS.</p>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
